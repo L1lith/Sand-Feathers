@@ -1,25 +1,26 @@
 import { valid, resolveFormat, reconstructFormat, sanitize, ANY } from 'sandhands'
 import autoBind from 'auto-bind'
 import { ObjectID } from 'mongodb'
+import clone from 'clone'
 
 const optionsFormat = {
   _: {
-    allowIDs: Boolean
+    allowIDQueries: Boolean
   },
   allOptional: true
 }
 
 const defaultOptions = {
-  allowIDs: true
+  allowIDQueries: true
 }
 
 class SandFeathers {
   constructor(format, handlerOptions) {
     this.handlerOptions = { ...defaultOptions, ...handlerOptions }
     sanitize(this.handlerOptions, optionsFormat)
-    this.resolvedFormat = resolveFormat(format)
+    let resolvedFormat = resolveFormat(format)
     if (
-      !valid(this.resolvedFormat, {
+      !valid(resolvedFormat, {
         _: {
           format: Object
         },
@@ -27,17 +28,17 @@ class SandFeathers {
       })
     )
       throw new Error('Please supply an object for the format')
-    if (this.resolvedFormat.format === Object) {
-      this.resolvedFormat.format = {}
-      this.resolvedFormat.options.strict = false
+    if (resolvedFormat.format === Object) {
+      resolvedFormat.format = {}
+      resolvedFormat.options.strict = false
     }
-    if (this.handlerOptions.allowIDs && !this.resolvedFormat.format.hasOwnProperty('_id')) {
-      // Automatically append the format for the ID if it is not strictly assigned
-      this.resolvedFormat.format._id = { _: ANY, validate: value => ObjectID.isValid(value) }
-    }
-    this.format = reconstructFormat(this.resolvedFormat)
-    this.queryFormat = { ...this.resolvedFormat, options: { ...this.resolvedFormat.options } }
+    this.format = reconstructFormat(resolvedFormat)
+    this.queryFormat = clone(resolvedFormat)
     this.queryFormat.options.allOptional = true
+    if (this.handlerOptions.allowIDQueries && !this.queryFormat.format.hasOwnProperty('_id')) {
+      // Automatically append the format for the ID if it is not strictly assigned
+      this.queryFormat.format._id = { _: ANY, validate: value => ObjectID.isValid(value) }
+    }
     this.queryFormat = reconstructFormat(this.queryFormat)
     autoBind(this)
   }
