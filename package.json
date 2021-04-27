@@ -1,0 +1,29 @@
+{
+  "name": "sand-feathers",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/SandFeathers.js",
+  "dependencies": {
+    "auto-bind": "^4.0.0",
+    "clone": "^2.1.2",
+    "mongodb": "^3.6.6",
+    "sandhands": "^1.8.9"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "microbundle": "^0.13.0",
+    "mocha": "^8.3.2"
+  },
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "mocha \"tests/**/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L1lith/Liliths-Templates.git"
+  },
+  "keywords": [],
+  "author": "05L1",
+  "license": "MIT"
+}
