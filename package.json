@@ -12,14 +12,21 @@
   "devDependencies": {
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
+    "cross-env": "^7.0.3",
     "microbundle": "^0.13.0",
     "mocha": "^8.3.2"
   },
-  "files": ["/dist/SandFeathers.js", "/dist/SandFeathers.js.map"]
+  "files": [
+    "/dist/SandFeathers.js",
+    "/dist/SandFeathers.js.map"
+  ],
   "scripts": {
     "build": "microbundle",
-    "dev": "microbundle watch",
-    "test": "mocha \"tests/**/*.js\""
+    "dev": "cross-env NODE_ENV=development&&microbundle watch",
+    "test": "mocha \"tests/**/*.js\"",
+    "build-production": "cross-env NODE_ENV=production&&microbundle",
+    "prepublishOnly": "npm run build-production&&npm run test",
+    "publish-alias": "npm publish"
   },
   "repository": {
     "type": "git",
