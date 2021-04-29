@@ -1,6 +1,6 @@
 {
   "name": "sand-feathers",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Universal Data Sanitation for Feathers.js",
   "main": "./dist/SandFeathers.js",
   "dependencies": {
