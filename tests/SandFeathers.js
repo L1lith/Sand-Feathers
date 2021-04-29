@@ -1,6 +1,5 @@
 const { expect } = require('chai')
-const SandFeathersLib = require('../dist/SandFeathers')
-const { SandFeathers } = SandFeathersLib
+const { SandFeathers } = require('../dist/SandFeathers')
 
 const baseKeys = ['before', 'after'] // Defining the expected Object structure
 const keyMaps = {
@@ -34,29 +33,5 @@ describe('The SandFeathers class should function correctly', () => {
         })
       })
     })
-  })
-  it('SandFeathers hooks succeed when valid data is passed', () => {
-    const sandFeathers = new SandFeathers({ message: String })
-    const hooks = sandFeathers.hooks
-    const createHook = hooks.before.create[0]
-    expect(() => {
-      createHook({ data: { message: 'hello :)' } })
-    }).not.to.throw()
-  })
-  it('SandFeathers hooks throw errors when invalid data is passed', () => {
-    const sandFeathers = new SandFeathers({ message: String })
-    const hooks = sandFeathers.hooks
-    const createHook = hooks.before.create[0]
-    expect(() => {
-      createHook({ data: { message: 12 } })
-    }).to.throw()
-  })
-  it('SandFeathers hooks throw errors when unspecified data is passed', () => {
-    const sandFeathers = new SandFeathers({ message: String })
-    const hooks = sandFeathers.hooks
-    const createHook = hooks.before.create[0]
-    expect(() => {
-      createHook({ data: { message: 'hello :)', color: 'orange' } })
-    }).to.throw()
   })
 })

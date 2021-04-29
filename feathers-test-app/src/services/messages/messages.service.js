@@ -1,6 +1,7 @@
 // Initializes the `messages` service on path `/messages`
 const { Messages } = require('./messages.class')
 const hooks = require('./messages.hooks')
+const messagesFormat = require('./messages.format')
 
 module.exports = function (app) {
   const options = {
@@ -13,5 +14,6 @@ module.exports = function (app) {
   // Get our initialized service so that we can register hooks
   const service = app.service('messages')
 
+  service.hooks(messagesFormat.hooks)
   service.hooks(hooks)
 }

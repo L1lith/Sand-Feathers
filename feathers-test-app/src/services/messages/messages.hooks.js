@@ -2,7 +2,7 @@ const format = require('./messages.format')
 
 module.exports = {
   before: {
-    all: [format],
+    all: [],
     find: [],
     get: [],
     create: [],
@@ -12,7 +12,7 @@ module.exports = {
   },
 
   after: {
-    all: [format],
+    all: [],
     find: [],
     get: [],
     create: [],

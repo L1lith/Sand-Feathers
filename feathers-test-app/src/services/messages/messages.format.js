@@ -1,11 +1,9 @@
 //const { ObjectId } = require('bson')
 const { ObjectID } = require('mongodb')
-const { feathersValidator, ANY } = require('../../../../dist/Sandhands-commonjs.js')
+const { SandFeathers } = require('../../../../dist/SandFeathers')
 
-module.exports = feathersValidator({
-  _: {
-    text: String,
-    _id: { _: ANY, validate: data => ObjectID.isValid(data) }
-  },
-  strict: true
+const format = new SandFeathers({
+  text: String
 })
+
+module.exports = format
