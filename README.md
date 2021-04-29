@@ -41,3 +41,5 @@ module.exports = function (app) {(format.hooks)
   service.hooks(hooks)
 }
 ```
+
+To see the full working example, see [here](https://github.com/L1lith/Sand-Feathers/tree/main/feathers-test-app/src/services/messages)
