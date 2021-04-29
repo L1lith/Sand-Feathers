@@ -26,11 +26,11 @@ describe('Create hook should operate correctly', () => {
     }).to.throw()
   })
   it('Create hook throws errors when a valid id is provided and allowIDUpload is false', () => {
-    const sandFeathers = new SandFeathers({ message: String })
+    const sandFeathers = new SandFeathers({ message: String }, { allowIDUpload: false })
     const hooks = sandFeathers.hooks
     const createHook = hooks.before.create[0]
     expect(() => {
-      createHook({ data: { message: 'hello :)', color: 'orange', _id: '123456789012' } })
+      createHook({ data: { message: 'hello :)', _id: '123456789012' } })
     }).to.throw()
   })
 })

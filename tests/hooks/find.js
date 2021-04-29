@@ -28,12 +28,12 @@ describe('Find hook should operate correctly', () => {
       findHook({ data: { message: 'hello :)', color: 'orange' } })
     }).to.throw()
   })
-  it('Find hook throws errors when a valid id is provided by default', () => {
+  it('Find hook throws no errors when a valid id is provided by default', () => {
     const sandFeathers = new SandFeathers({ message: String })
     const hooks = sandFeathers.hooks
     const findHook = hooks.before.create[0]
     expect(() => {
-      findHook({ data: { message: 'hello :)', color: 'orange', _id: '123456789012' } })
-    }).to.throw()
+      findHook({ data: { message: 'hello :)', _id: '123456789012' } })
+    }).to.not.throw()
   })
 })
